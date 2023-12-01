@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     otp: DataTypes.STRING,
     otpGeneratedAt: DataTypes.DATE,
-    otpGenerationCount: DataTypes.INTEGER
+    otpGenerationCount: DataTypes.INTEGER,
+    loginAttempts: DataTypes.INTEGER,
+    blockedUntil: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'User',

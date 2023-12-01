@@ -19,6 +19,14 @@ const validate = function(method, req, res, next){
           .isLength({ min: 10, max: 10 }).withMessage(errorMessages.PHONE_MINIMUM_LENGTH),
       ]
     }
+		case 'login-verify': {
+      return [
+        body('phone').isNumeric().withMessage(errorMessages.INVALID_PHONE)
+          .isLength({ min: 10, max: 10 }).withMessage(errorMessages.PHONE_MINIMUM_LENGTH),
+				body('otp').isNumeric().withMessage(errorMessages.INVALID_OTP)
+          .isLength({ min: 6, max: 6 }).withMessage(errorMessages.OTP_MINIMUM_LENGTH),
+      ]
+    }
   }
 }
 
