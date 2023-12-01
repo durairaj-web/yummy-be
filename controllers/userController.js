@@ -1,12 +1,27 @@
+'use strict';
+
 const { Op } = require('sequelize');
 const { User } = require('./../models')
-const ApiResponse = require('./../utils/response')
+const { validationResult } = require('express-validator');
+const { ApiResponse, MapErrorMsg } = require('../helpers/response')
 const { errorMessages, errorDetails } = require('./../constants/lang/en/messages')
 
 const UserController = {
     registerUser: async (req, res) => {
         try {
             const { name, email, phone } = req.body;
+            console.log(name.length)
+
+            const result = validationResult(req);
+            if (!result.isEmpty()) {
+              return res.status(400).send(
+                ApiResponse.error(
+                  MapErrorMsg(result),
+                  400,
+                  errorDetails.INVALID_INPUT
+                )
+              );
+            }
       
             const existingUser = await User.findOne({
               where: {

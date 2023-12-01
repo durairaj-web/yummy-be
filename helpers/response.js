@@ -19,5 +19,17 @@ const ApiResponse = {
       };
     },
   };
+
+  const MapErrorMsg = function (Error) {
+    let message = '';
+    Error.array().forEach((err,index) => {
+      console.log(err)
+      message += err.msg + (index < Error.array().length - 1 ? '\n' : '');
+    })
+    return message;
+  }
   
-  module.exports = ApiResponse;
+  module.exports = {
+    ApiResponse,
+    MapErrorMsg
+  };
