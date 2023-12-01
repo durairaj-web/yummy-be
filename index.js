@@ -1,10 +1,11 @@
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const userRoutes = require('./routes/user');
 const validator = require('validator');
+const userRoutes = require('./routes/user');
 
 // Middleware for request parsing
 app.use(express.json());
@@ -21,7 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Use routes
+// Register routes
 app.use('/v1/api/users', userRoutes);
 
 // Start the server
